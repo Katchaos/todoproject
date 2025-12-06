@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { ToDoPage } from "../pages/todo-page";
 
 let toDoPage: ToDoPage
@@ -8,39 +8,39 @@ test.beforeEach(async ({ page }) => {
   await toDoPage.open()
 })
 
-test('verify to do task  creation', async ({ page }) => {
+test('verify to do task creation', async () => {
   await toDoPage.createTask();
   await toDoPage.verifyTaskIsVisible();
 });
 
-test('verify two task creation', async ({ page }) => {
+test('verify two task creation', async () => {
   await toDoPage.createTask();
   await toDoPage.createTask();
   await toDoPage.getTaskCount(2);
 });
 
-test('verify completed filter', async ({ page }) => {
+test('verify completed filter', async () => {
   await toDoPage.createTask();
   await toDoPage.createTask();
   await toDoPage.clickFilterCompleted();
   await toDoPage.getTaskCount(0);
 });
 
-test('verify active filter', async ({ page }) => {
+test('verify active filter', async () => {
   await toDoPage.createTask();
   await toDoPage.createTask();
   await toDoPage.clickFilterActive();
   await toDoPage.getTaskCount(2);
 });
 
-test('verify all filter', async ({ page }) => {
+test('verify all filter', async () => {
   await toDoPage.createTask();
   await toDoPage.createTask();
   await toDoPage.clickFilterAll();
   await toDoPage.getTaskCount(2);
 });
 
-test('verify active filter for completed task', async ({ page }) => {
+test('verify active filter for completed task', async () => {
   await toDoPage.createTask();
   await toDoPage.clickItemToggle();
   await toDoPage.clickFilterActive();
@@ -49,7 +49,7 @@ test('verify active filter for completed task', async ({ page }) => {
   await toDoPage.getTaskCount(1);
 });
 
-test('verify clear completed button', async ({ page }) => {
+test('verify clear completed button', async () => {
   await toDoPage.createTask();
   await toDoPage.getTaskCount(1);
   await toDoPage.clickItemToggle();
@@ -57,21 +57,21 @@ test('verify clear completed button', async ({ page }) => {
   await toDoPage.getTaskCount(0);
 });
 
-test('verify deletion of a task', async ({ page }) => {
+test('verify deletion of a task', async () => {
   await toDoPage.createTask();
   await toDoPage.getTaskCount(1);
   await toDoPage.deleteTask();
   await toDoPage.getTaskCount(0);
 });
 
-test('verify after task is deleted only one task is visible', async ({ page }) => {
+test('verify after task is deleted only one task is visible', async () => {
   await toDoPage.createTask();
   await toDoPage.createTask();
   await toDoPage.deleteTaskByIndex(1);
   await toDoPage.getTaskCount(1);
 });
 
-test('edit task name with double click', async ({ page }) => {
+test('edit task name with double click', async () => {
   await toDoPage.createTask();
   await toDoPage.dblClick(toDoPage.taskNameField);
   await toDoPage.editTaskName();
